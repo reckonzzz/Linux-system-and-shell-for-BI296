@@ -1,0 +1,40 @@
+#Question3.4
+BEGIN{
+    FS=","
+    printf("每一个队员的平均分为：\n")
+}
+/Name/{
+    for(i=3;i<=NF;i++){
+        match_name[i-2]=$i
+    }
+}
+!/Name/{
+    row=NR
+    col=NF
+    score_player=0
+    for(i=3;i<=NF;i++){
+        if($i==-1){
+            col--
+            times[i-2]++
+            $i=0
+        }
+        else{
+            score_match[i-2]+=$i
+            score_player+=$i
+            if($2=="Red"){score_team["Red"]+=$i}
+            else if($2=="Blue"){score_team["Blue"]+=$i}
+            else{score_team["Green"]+=$i}
+        }
+    }
+    printf("%-10s%7.2f\n",$1,score_player/(col-2))
+}
+END{
+    printf("每一场比赛的平均分为：\n")
+    for(i=1;i<=3;i++){
+        printf("%-13s%7.2f\n",match_name[i],score_match[i]/(row-times[i]-1))
+    }
+    printf("每一个队伍的平均分为：\n")
+    for(c in score_team){
+        printf("%-10s%7.2f\n",c,score_team[c]/(NF-2))
+    }
+}

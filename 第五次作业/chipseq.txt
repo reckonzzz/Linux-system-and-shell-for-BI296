@@ -1,0 +1,30 @@
+Chromosome:  chr1 
+Start:  3000306 
+End:  3000307 
+Strength:  0.006 
+
+Chromosome:  chr1 
+Start:  3000307 
+End:  3000308 
+Strength:  0.010 
+
+Chromosome:  chr1 
+Start:  3000308 
+End:  3000309 
+Strength:  0.014 
+
+Chromosome:  chrX 
+Start:  4000306 
+End:  4000307 
+Strength:  0.014 
+
+Chromosome:  chr9 
+Start:  8000306 
+End:  8000307 
+Strength:  0.100 
+
+Chromosome:  chr9 
+Start:  8000307 
+End:  8000308 
+Strength:  0.200 
+

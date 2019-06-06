@@ -1,0 +1,24 @@
+#Question3.3
+BEGIN{
+    num=0
+    count=0
+}
+/^ATOM.*CA/{
+    num++
+    atom_number[num]=$2
+    pos_x[num]=$7
+    pos_y[num]=$8
+    pos_z[num]=$9
+}
+END{
+    for(i=1;i<=num;i++){
+        for(j=i+1;j<=num;j++){
+            if(i!=j){
+                distance=sqrt((pos_x[i]-pos_x[j])^2+(pos_y[i]-pos_y[j])^2+(pos_z[i]-pos_z[j])^2)
+                printf("原子序号第%d号和第%d号之间的Cα距离为%.2f\n",atom_number[i],atom_number[j],distance)
+                count++
+            }
+        }
+    }
+    printf("\n\n总共有%d对Cα原子的距离\n",count)
+}
