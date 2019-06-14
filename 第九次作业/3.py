@@ -1,4 +1,5 @@
 import random
+import math
 
 
 def random_index():
@@ -38,18 +39,38 @@ def create(total):
         elif arr[index] == 'T':
             t_times += 1
             result += 'T'
-
-    print("total: %5d  A: %4d  G: %4d  C: %4d  T: %4d" % (total, a_times, g_times, c_times, t_times))
-    print("%0.3f %0.3f %0.3f %0.3f" % (a_times/total, g_times/total, c_times/total, t_times/total))
+    print(result)
     return result
 
 
-def main():
-    length = [100, 200, 500, 1000, 5000, 10000, 50000, 100000]
-    for total in range(0, 2100, 100):
-        if total > 0:
-            #print(create(total))
-            create(total)
+def create_kmer(seq, k):
+    d = {}
+    for i in range(len(seq) - k + 1):
+        temp = seq[i:i + k]
+        d[temp] = d.get(temp, 0) + 1
+    return d
 
 
-main()
+def gaussian(kmer_1, kmer_2, n):
+    sum_a = 0
+    for key in (set(kmer_1.keys()) | set(kmer_2.keys())):
+        sum_a = sum_a + (kmer_1.get(key, 0) - kmer_2.get(key, 0)) ** 2
+    sum_a *= (-1)
+    gauss = math.exp(sum_a / n)
+    return gauss
+
+
+k = input("请输入k:")
+k = int(k)
+print("第一条序列：")
+seq1 = create(200)
+print("第二条序列：")
+seq2 = create(200)
+kmer1 = create_kmer(seq1, k)
+kmer2 = create_kmer(seq2, k)
+print("第一条序列的K-mer：")
+print(kmer1)
+print(kmer2)
+print("Gaussian相似性分值：")
+print(gaussian(kmer1, kmer2, 200))
+
